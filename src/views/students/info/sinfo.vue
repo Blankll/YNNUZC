@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <div class="title">学生基本个人信息</div>
+    <div class="title">学生个人基本信息</div>
     <table class="table table-bordered">
       <tr>
         <th>姓名</th>

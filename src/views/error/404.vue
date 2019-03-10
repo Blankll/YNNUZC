@@ -9,7 +9,7 @@
         </p>
         <p class="text">你可以点击下面的按钮继续</p>
         <div class="link">
-          <el-button @click="goBack">返回上一层</el-button>
+          <el-button @click="goBack">返回上一页</el-button>
         </div>
       </div>
       <img src="@/assets/img/404.png" alt="" class="error-img">

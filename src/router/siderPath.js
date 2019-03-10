@@ -16,7 +16,18 @@ export default [
         path: 'index',
         name: 'index',
         meta: {
+          name: '学校信息统计',
+          level: 1,
+          auth: false
+        },
+        component: () => import('@/views/admin/info/index.vue')
+      },
+      {
+        path: 'index',
+        name: 'index',
+        meta: {
           name: '学院信息统计',
+          level: 2,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -26,6 +37,7 @@ export default [
         name: 'cmajor',
         meta: {
           name: '专业信息统计',
+          level: 2,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -35,6 +47,7 @@ export default [
         name: 'cedit',
         meta: {
           name: '基本信息管理',
+          level: 3,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -57,6 +70,7 @@ export default [
         name: 'icollege',
         meta: {
           name: '学院信息',
+          level: 2,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -66,6 +80,7 @@ export default [
         name: 'imajor',
         meta: {
           name: '专业信息',
+          level: 2,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -75,6 +90,7 @@ export default [
         name: 'iclass',
         meta: {
           name: '班级信息',
+          level: 3,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -84,6 +100,7 @@ export default [
         name: 'istudents',
         meta: {
           name: '学生信息',
+          level: 3,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -135,6 +152,7 @@ export default [
         name: 'vschool',
         meta: {
           name: '学校审核',
+          level: 1,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -144,6 +162,7 @@ export default [
         name: 'vcollege',
         meta: {
           name: '学院审核',
+          level: 2,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -153,6 +172,7 @@ export default [
         name: 'vclass',
         meta: {
           name: '班级审核',
+          level: 3,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -174,6 +194,27 @@ export default [
         name: 'rall',
         meta: {
           name: '全校综测成绩',
+          level: 1,
+          auth: false
+        },
+        component: () => import('@/views/admin/info/index.vue')
+      },
+      {
+        path: 'rall',
+        name: 'rall',
+        meta: {
+          name: '学院综测成绩',
+          level: 2,
+          auth: false
+        },
+        component: () => import('@/views/admin/info/index.vue')
+      },
+      {
+        path: 'rall',
+        name: 'rall',
+        meta: {
+          name: '班级综测成绩',
+          level: 3,
           auth: false
         },
         component: () => import('@/views/admin/info/index.vue')
@@ -188,6 +229,7 @@ export default [
       icon: 'iconfont icon-manager',
       auth: false
     },
+    redirect: '/admin',
     component: Main,
     children: [
       {
@@ -195,46 +237,75 @@ export default [
         name: 'mschool',
         meta: {
           name: '学校管理员',
+          level: 1,
           auth: false
         },
-        component: () => import('@/views/admin/info/index.vue')
+        component: () => import('@/views/admin/manager/mschool/mschool.vue')
       },
       {
-        path: 'mcollege',
-        name: 'mcollege',
+        path: 'mfaculty',
+        name: 'mfaculty',
         meta: {
           name: '学院管理员',
+          level: 2,
           auth: false
         },
-        component: () => import('@/views/admin/info/index.vue')
+        component: () => import('@/views/admin/manager/mfaculty/mfaculty.vue')
       },
       {
         path: 'mclass',
         name: 'mclass',
         meta: {
           name: '班级管理员',
+          level: 3,
           auth: false
         },
-        component: () => import('@/views/admin/info/index.vue')
+        component: () => import('@/views/admin/manager/mclass/mclass.vue')
       },
       {
-        path: 'mevaluator',
-        name: 'mevaluator',
+        path: 'mmember',
+        name: 'mmember',
         meta: {
           name: '审议评分小组成员',
+          level: 3,
           auth: false
         },
-        component: () => import('@/views/admin/info/index.vue')
+        component: () => import('@/views/admin/manager/mmember/mmember.vue')
       },
       {
         path: 'msystem',
         name: 'msystem',
         meta: {
           name: '系统管理员',
+          level: 1,
           auth: false
         },
-        component: () => import('@/views/admin/info/index.vue')
+        component: () => import('@/views/admin/manager/msystem/msystem.vue')
       }
     ]
   }
 ]
+
+// function getBoolean (num) {
+//   let scope = localStorage.getItem('scope')
+//   let hidden = null
+//   let level = null
+//   if (scope < 5) {
+//     if(scope == 1 || scope == 4) {
+//       level = 1
+//     } else if (scope == 2) {
+//       level = 2
+//     } else if (scope == 3) {
+//       level = 3
+//     }
+//     if (level > num) {
+//       hidden = true // 隐藏
+//     } else if (level = num) {
+//       hidden = false
+//     }
+//   } else {
+//     hidden = true
+//   }
+//   return hidden
+//   console.log(hidden)
+// }

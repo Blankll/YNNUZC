@@ -46,6 +46,46 @@ export default [
               auth: false
             },
             component: () => import('@/views/students/evaluation/components/moralitybase.vue')
+          },
+          {
+            path: 'bodybase',
+            name: 'bodybase',
+            meta: {
+              auth: false
+            },
+            component: () => import('@/views/students/evaluation/components/bodybase.vue')
+          },
+          {
+            path: 'moralityimprove',
+            name: 'moralityimprove',
+            meta: {
+              auth: false
+            },
+            component: () => import('@/views/students/evaluation/components/moralityimprove.vue')
+          },
+          {
+            path: 'professionalcomprehensive',
+            name: 'professionalcomprehensive',
+            meta: {
+              auth: false
+            },
+            component: () => import('@/views/students/evaluation/components/professionalcomprehensive.vue')
+          },
+          {
+            path: 'societypractice',
+            name: 'societypractice',
+            meta: {
+              auth: false
+            },
+            component: () => import('@/views/students/evaluation/components/societypractice.vue')
+          },
+          {
+            path: 'techinovation',
+            name: 'techinovation',
+            meta: {
+              auth: false
+            },
+            component: () => import('@/views/students/evaluation/components/techinovation.vue')
           }
         ]
       },
@@ -56,6 +96,14 @@ export default [
           auth: false
         },
         component: () => import('@/views/students/evaluation/sevidence.vue')
+      },
+      {
+        path: 'evaluationresult',
+        name: 'evaluationresult',
+        meta: {
+          auth: false
+        },
+        component: () => import('@/views/students/evaluation/evaluationresult.vue')
       }
     ]
   },

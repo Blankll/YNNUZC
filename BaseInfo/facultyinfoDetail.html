@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>facultyinfoDetail.html</title>
+	<link type="text/css" rel="stylesheet" href="../../resources/jquery-easyui-1.3.5/themes/default/easyui.css" />
+	<link type="text/css" rel="stylesheet" href="../../resources/jquery-easyui-1.3.5/themes/icon.css" />
+  	<link type="text/css" rel="stylesheet" href="../../comon/css/formsyle.css"></link>
+  	<script type="text/javascript" src="../../comon/js/jquery/jquery.min.js"></script>
+  	<script type="text/javascript" src="../../comon/js/comon.main.js"></script>
+  	<script type="text/javascript" src="../../comon/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../resources/jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../resources/jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script>
+  	<script type="text/javascript" src="facultyinfoDetail.js"></script>
+  </head> 
+  <body style="overflow: hidden;" onload="initDocumentPage();">
+	<div class="easyui-layout" fit="true">
+		<div data-options="region:'north',split:false" style="height:30px; overflow: hidden;">
+			<table>
+				<tr>
+					<td>
+						<div id="stander-bar" 
+							saveAction="dataSave()" refreshAction="dataRefresh()"
+							deleteAction="dataDeleted()" style="margin-left: 1px;">
+						</div>
+					</td>
+				</tr>
+			</table>
+			<script type="text/javascript">
+				init_toolbar();
+			</script>
+		</div>
+		<div data-options="region:'center'" style="text-align: center; overflow: auto; padding: 5px;">
+			<div style="width: 800px; margin: auto;">
+				<form id="MAIN_DATA_FORM">
+					<div class="easyui-panel" title="表单信息" style="padding: 5px; margin-bottom: 5px; overflow: hidden;">
+						<table class="Detailtable" style="table-layout: fixed; width:100%;" id="mainLayoutTable">
+							<tr height="5px">
+								<td width="80px"></td>
+								<td width="150px"></td>
+								<td width="80px"></td>
+								<td width="150px"></td>
+								<td width="80px"></td>
+								<td></td>
+							</tr>
+							<tr><td>学院名称</td><td><input type="text" id="fname" name="fname" class="forminput" style="width: 100%;"/></td><td>学院英文名称</td><td><input type="text" id="fenglish" name="fenglish" class="forminput" style="width: 100%;"/></td><td>学院代码</td><td><input type="text" id="facultyid" name="facultyid" class="forminput" style="width: 100%;"/></td></tr><tr><td>学院描述</td><td><input type="text" id="fdesc" name="fdesc" class="forminput" style="width: 100%;"/></td><td>学院英文描述</td><td><input type="text" id="fdesc_en" name="fdesc_en" class="forminput" style="width: 100%;"/></td></tr>
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

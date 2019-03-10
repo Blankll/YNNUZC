@@ -1,46 +1,55 @@
 <template>
-  <div>
-    <tr><td colspan="12" class="small-title">(二)社会实践素质</td></tr>
-        <tr>
-          <td colspan="2">演讲、辩论、征文及知识竞赛等</td>
-          <td colspan="2">加分原因</td>
-          <td colspan="2">社会实践能力</td>
-          <td colspan="2">加分原因</td>
-          <td colspan="2">宣传能力</td>
-          <td colspan="2">加分原因</td>
-        </tr>
-        <tr>
-          <td colspan="2">1</td>
-          <td colspan="2">2</td>
-          <td colspan="2">3</td>
-          <td colspan="2">4</td>
-          <td colspan="2">5</td>
-          <td colspan="2">6</td>
-        </tr>
-        <tr><td colspan="12" class="small-title">(三)科技创新素质</td></tr>
-        <tr>
-          <td>科技竞赛</td>
-          <td>加分原因</td>
-          <td>科研论文</td>
-          <td>加分原因</td>
-          <td>科研训练或相关课题</td>
-          <td>加分原因</td>
-          <td>出版专著(参与编著)</td>
-          <td>加分原因</td>
-          <td>其他</td>
-          <td colspan="3">加分原因</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
-          <td>5</td>
-          <td>6</td>
-          <td>7</td>
-          <td>8</td>
-          <td>9</td>
-          <td colspan="3">10</td>
-        </tr>
-  </div>
+  <el-form ref="" :model="bodyBaseForm">
+    <table class="table table-bordered">
+      <tr>
+        <th rowspan="3" class="table-left-title">发展性素质</th>
+        <th colspan="12" class="table-small-title">(二)社会实践素质</th>
+      </tr>
+      <tr>
+        <th colspan="2">演讲、辩论、征文及知识竞赛等</th>
+        <th colspan="2">加分原因</th>
+        <th colspan="2">社会实践能力</th>
+        <th colspan="2">加分原因</th>
+        <th colspan="2">宣传能力</th>
+        <th colspan="2">加分原因</th>
+      </tr>
+      <tr>
+        <td colspan="2">1</td>
+        <td colspan="2">2</td>
+        <td colspan="2">3</td>
+        <td colspan="2">4</td>
+        <td colspan="2">5</td>
+        <td colspan="2">6</td>
+      </tr>
+    </table>
+    <el-row :gutter="20">
+        <el-col :span="8"><el-button plain type="info" @click="prevent" class="table-btn">返回上一步</el-button></el-col>
+        <el-col :span="16"><el-button plain type="primary" @click="next" class="table-btn">提交并下一步</el-button></el-col>
+      </el-row>
+  </el-form>
 </template>
+<script>
+import Bus from '@/views/common/buss.js'
+export default {
+  name: 'StudentBodyBase',
+  data () {
+    return {
+      bodyBaseForm: {},
+      active: 4
+    }
+  },
+  methods: {
+    prevent () {
+      Bus.$emit('val', this.active - 2)
+      if (this.active > 6) this.active = 0
+      this.$router.push({ path: 'moralityimprove' })
+    },
+    next () {
+      Bus.$emit('val', this.active)
+      Bus.$emit('finishAct', this.active)
+      if (this.active > 6) this.active = 0
+      this.$router.push({ path: 'techinovation' })
+    }
+  }
+}
+</script>

@@ -68,6 +68,14 @@ table {
 	margin-right: 10px;
 	cursor: pointer;
 }
-.el-upload-dragger {
+.upload-dragger {
 	width: 960px;
+}
+.all-page {
+	height: 100%;
+}
+
+.FormType {
+	font-weight: bold;
+	color: #409eff;
 }

@@ -5,30 +5,41 @@
         <div class="ynnu-img"></div>
         <div class="sys-name">大学生综合素质测评系统</div>
       </div>
-      <div class="right-login">
-        <el-form :model="ruleForm" :rules="rules" status-icon ref="ruleForm" class="demo-ruleForm">
-          <el-form-item prop="type">
-            <el-select v-model="ruleForm.userType" class="select" placeholder="请选择用户类型">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="name">
-            <el-input type="text" v-model="ruleForm.name" auto-complete="off" placeholder="请输入用户名"></el-input>
-          </el-form-item>
-          <el-form-item prop="pass">
-            <el-input type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="请输入密码"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button class="login-btn" type="primary" @click="submitForm('ruleForm')">登录</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
+      <el-tabs type="card" class="right-login">
+        <el-tab-pane>
+          <span slot="label"><i class="iconfont icon-student"></i>&nbsp;&nbsp;学生登录</span>
+          <el-form :model="stuLoginForm" :rules="rules" status-icon ref="ruleForm" class="demo-ruleForm">
+            <el-form-item prop="name">
+              <el-input type="text" v-model="stuLoginForm.name" auto-complete="off" placeholder="请输入学生用户账号"></el-input>
+            </el-form-item>
+            <el-form-item prop="pwd">
+              <el-input type="password" v-model="stuLoginForm.pwd" auto-complete="off" placeholder="请输入学生用户密码"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button class="login-btn" type="primary" @click="stuLoginSubmit">登录</el-button>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
+        <el-tab-pane>
+          <span slot="label"><i class="iconfont icon-teacher"></i>&nbsp;&nbsp;管理员登录</span>
+          <el-form :model="teaLoginForm" :rules="rules" status-icon ref="ruleForm" class="demo-ruleForm">
+            <el-form-item prop="name">
+              <el-input type="text" v-model="teaLoginForm.name" auto-complete="off" placeholder="请输入管理员账号"></el-input>
+            </el-form-item>
+            <el-form-item prop="pwd">
+              <el-input type="password" v-model="teaLoginForm.pwd" auto-complete="off" placeholder="请输入管理员密码"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button class="login-btn" type="primary" @click="teaLoginSubmit">登录</el-button>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
+      </el-tabs>
     </div>
-    <div class="copyright">云南师范大学 &copy; 2018 - 极客范技术支持</div>
+    <div class="copyright">云南师范大学 &copy; 2018 - <span ref="YearDate"></span> 极客范技术支持</div>
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
 export default {
   data () {
     let validateName = (rule, value, callback) => {
@@ -39,61 +50,61 @@ export default {
       }
     }
     return {
-      options: [
-        {
-          value: 'teacher',
-          label: '教师'
-        }, {
-          value: 'member',
-          label: '评议员'
-        }, {
-          value: 'student',
-          label: '学生'
-        }, {
-          value: 'manager',
-          label: '管理员'
-        }
-      ],
-      ruleForm: {
-        userType: '',
-        name: '',
-        pass: ''
+      stuLoginForm: {
+        name: '1443103000244',
+        pwd: '104943'
+      },
+      teaLoginForm: {
+        name: '1643205000167',
+        pwd: '0707'
       },
       rules: {
-        // type: [
-        //   { required: true, message: '请选择用户类型', trigger: 'blur' },
-        //   { validator: true, trigger: 'blur' }
-        // ],
         name: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { validator: validateName, trigger: 'blur' }
+          { required: true, message: '请输入6-13账号', trigger: 'blur' },
+          { min: 6, max: 13, validator: validateName, trigger: 'blur' }
         ],
-        pass: [
+        pwd: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 12, message: '请输入6-12位密码', trigger: 'blur' }
+          { min: 4, max: 6, message: '请输入6位密码', trigger: 'blur' }
         ]
       }
     }
   },
   methods: {
-    ...mapMutations(['setUser']),
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          // alert('submit')
-          let user = {
-            name: 'jsp',
-            pawd: '1234567',
-            auth: 'edit'
-          }
-          this.setUser(user)
-          this.$router.push({path: '/'})
-        } else {
-          console.log('error submit!!!')
-          return false
-        }
-      })
+    getNowYear () {
+      const date = new Date()
+      const year = date.getFullYear()
+      this.$refs.YearDate.innerHTML = year
+    },
+    stuLoginSubmit () {
+      this.$axios
+        .post('/api/zongce/student/login', {
+          ynnu_id: this.stuLoginForm.name,
+          password: this.stuLoginForm.pwd
+        })
+        .then(res => {
+          localStorage.setItem('token', res.data.token)
+          localStorage.setItem('scope', 6)
+          this.$router.push({ path: '/student' })
+        })
+        .catch(res => {})
+    },
+    teaLoginSubmit () {
+      this.$axios
+        .post('/api/zongce/admin/login', {
+          ynnu_id: this.teaLoginForm.name,
+          password: this.teaLoginForm.pwd
+        })
+        .then(res => {
+          localStorage.setItem('token', res.data.token)
+          localStorage.setItem('scope', res.data.scope)
+          this.$router.push({ path: '/admin' })
+        })
+        .catch(res => {})
     }
+  },
+  mounted () {
+    this.getNowYear()
   }
 }
 </script>
@@ -124,16 +135,14 @@ export default {
         font-family STKaiti
         text-align center
     .right-login
-      width 250px
       border-radius 10px
       margin-top 150px
       margin-left 60px
-      padding 60px 30px 20px 30px
       background rgba(255,255,255,.4)
-      .select
-        width 250px
-      .login-btn
-        width 100%
+      .demo-ruleForm
+        padding 30px
+        .login-btn
+          width 100%
   .copyright
     position absolute
     width 100%
